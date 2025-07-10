@@ -15,17 +15,23 @@ export MPCTL_DKR_CONTAINER_HAWK_NODE="hawk_participant_"
 # Docker container id: PostgreSQL dB.
 export MPCTL_DKR_CONTAINER_PGRES_DB="iris-mpc-dev_db-1"
 
-# Docker file: Hawk node.
-export MPCTL_DKR_FILE_STANDARD="Dockerfile.dev.hawk"
+# Docker file: HNSW server at genesis.
+export MPCTL_DKR_FILE_HNSW_SERVER_GENESIS="Dockerfile.dev.hawk"
 
-# Docker file: Hawk node at genesis.
-export MPCTL_DKR_FILE_GENESIS="Dockerfile.dev.hawk"
+# Docker file: HNSW server.
+export MPCTL_DKR_FILE_HNSW_SERVER_STANDARD="Dockerfile.dev.hawk"
+
+# Docker file: HNSW tests e2e local.
+export MPCTL_DKR_FILE_HNSW_TESTS_E2E="Dockerfile.hnsw.test.e2e"
 
 # Docker image id: Hawk node.
 export MPCTL_DKR_IMAGE_NAME_STANDARD="hawk-server-local-build"
 
 # Docker image id: Hawk node at genesis.
 export MPCTL_DKR_IMAGE_NAME_GENESIS="hawk-server-genesis"
+
+# Docker image id: HNSW tests e2e local.
+export MPCTL_DKR_IMAGE_HNSW_TESTS_E2E="hnsw-tests-e2e-local"
 
 ##############################################################################
 # Returns a node's docker container name.

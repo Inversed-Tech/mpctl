@@ -31,6 +31,7 @@ alias mpctl-dkr-node-stop='source $MPCTL/cmds/dkr/node_stop.sh'
 alias mpctl-dkr-node-stop-genesis='source $MPCTL/cmds/dkr/node_stop.sh binary=genesis'
 alias mpctl-dkr-node-view-logs='source $MPCTL/cmds/dkr/node_view_logs.sh'
 alias mpctl-dkr-node-view-logs-genesis='source $MPCTL/cmds/dkr/node_view_logs.sh binary=genesis'
+alias mpctl-dkr-services-clean='source $MPCTL/cmds/dkr/services_clean.sh'
 alias mpctl-dkr-services-down='source $MPCTL/cmds/dkr/services_down.sh'
 alias mpctl-dkr-services-up='source $MPCTL/cmds/dkr/services_up.sh'
 
