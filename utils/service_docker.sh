@@ -7,10 +7,16 @@ export MPCTL_DKR_COMPOSE_HAWK="docker-compose.test.yaml"
 export MPCTL_DKR_COMPOSE_HAWK_GENESIS="docker-compose.test.genesis.yaml"
 
 # Docker compose file: Base services.
+export MPCTL_DKR_COMPOSE_HNSW_E2E="docker-compose.test.hnsw.e2e.yaml"
+
+# Docker compose file: Base services.
 export MPCTL_DKR_COMPOSE_SERVICES="docker-compose.dev.yaml"
 
 # Docker container id: Hawk node.
 export MPCTL_DKR_CONTAINER_HAWK_NODE="hawk_participant_"
+
+# Docker container id: HNSW end to end tests.
+export MPCTL_DKR_CONTAINER_HNSW_E2E="hnsw_tests_e2e"
 
 # Docker container id: PostgreSQL dB.
 export MPCTL_DKR_CONTAINER_PGRES_DB="iris-mpc-dev_db-1"

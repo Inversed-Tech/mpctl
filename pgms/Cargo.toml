@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 clap = { version = "4", features = ["derive", "env"] }
+iris-mpc-common = { path = "../../iris-mpc/iris-mpc-common" }
 rand = "0.9.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1.0.140"
@@ -12,3 +13,7 @@ serde_json = "1.0.140"
 [[bin]]
 name = "generate-serial-ids-for-deletion"
 path = "bin/generate_serial_ids_for_deletion.rs"
+
+[[bin]]
+name = "write-node-config-toml"
+path = "bin/write_node_config_toml.rs"

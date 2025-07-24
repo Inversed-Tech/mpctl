@@ -4,35 +4,18 @@ function _help() {
     echo "
     COMMAND
     ----------------------------------------------------------------
-    mpctl-dkr-build-images
+    mpctl-local-run-e2e-tests
 
     DESCRIPTION
     ----------------------------------------------------------------
-    Builds Hawk server docker images.
+    Runs full end to end HNSW tests.
     "
 }
 
 function _main()
 {
-    # HNSW server: genesis.
-    _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_GENESIS}" "${MPCTL_DKR_IMAGE_NAME_GENESIS}"
-
-    # HNSW server: standard.
-    _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_STANDARD}" "${MPCTL_DKR_IMAGE_NAME_STANDARD}"
-
-    # HNSW tests: e2e.
-    _build_image "${MPCTL_DKR_FILE_HNSW_TESTS_E2E}" "${MPCTL_DKR_IMAGE_HNSW_TESTS_E2E}"
-}
-
-function _build_image()
-{
-    local image_fname=${1}
-    local image_tag=${2}
-
-    pushd "$(get_path_to_monorepo)" || exit
-    docker build \
-        -f "$(get_path_to_monorepo)/${image_fname}" \
-        -t "${image_tag}:latest" .
+    pushd "$(get_path_to_monorepo)/iris-mpc-upgrade-hawk" || exit
+    cargo test --test e2e_genesis -- --include-ignored
     popd || exit
 }
 

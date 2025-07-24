@@ -4,35 +4,19 @@ function _help() {
     echo "
     COMMAND
     ----------------------------------------------------------------
-    mpctl-dkr-build-images
+    mpctl-dkr-e2e-up
 
     DESCRIPTION
     ----------------------------------------------------------------
-    Builds Hawk server docker images.
+    Brings down HNSW end to end test docker container.
     "
 }
 
 function _main()
 {
-    # HNSW server: genesis.
-    _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_GENESIS}" "${MPCTL_DKR_IMAGE_NAME_GENESIS}"
-
-    # HNSW server: standard.
-    _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_STANDARD}" "${MPCTL_DKR_IMAGE_NAME_STANDARD}"
-
-    # HNSW tests: e2e.
-    _build_image "${MPCTL_DKR_FILE_HNSW_TESTS_E2E}" "${MPCTL_DKR_IMAGE_HNSW_TESTS_E2E}"
-}
-
-function _build_image()
-{
-    local image_fname=${1}
-    local image_tag=${2}
-
     pushd "$(get_path_to_monorepo)" || exit
-    docker build \
-        -f "$(get_path_to_monorepo)/${image_fname}" \
-        -t "${image_tag}:latest" .
+    docker compose -f "${MPCTL_DKR_COMPOSE_HNSW_E2E}" \
+        down "${MPCTL_DKR_CONTAINER_HNSW_E2E}"
     popd || exit
 }
 

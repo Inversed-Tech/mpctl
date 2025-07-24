@@ -52,7 +52,8 @@ function _main()
             --batch-size="${batch_size}" \
             --batch-size-r="${batch_size_error_rate}" \
             --max-height="${height_max}" \
-            --perform-snapshot="false"
+            --perform-snapshot="false" \
+            --use-backup-as-source="false"
 
     # Start process: detached.
     else
@@ -66,6 +67,7 @@ function _main()
             --batch-size-r="${batch_size_error_rate}" \
             --max-height="${height_max}" \
             --perform-snapshot="false" \
+            --use-backup-as-source="false" \
             > "${path_to_log}" 2>&1 &
     fi
 }
