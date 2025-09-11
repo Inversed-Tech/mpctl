@@ -24,6 +24,6 @@ function get_environment_name()
 # Import other utils - order matters.
 source "${MPCTL}"/utils/os.sh
 source "${MPCTL}"/utils/paths.sh
-source "${MPCTL}"/utils/service_aws.sh
-source "${MPCTL}"/utils/service_docker.sh
-source "${MPCTL}"/utils/service_pgres.sh
+source "${MPCTL}"/utils/aws.sh
+source "${MPCTL}"/utils/docker.sh
+source "${MPCTL}"/utils/pgres.sh

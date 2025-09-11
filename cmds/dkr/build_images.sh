@@ -17,7 +17,7 @@ function _main()
     # HNSW server: genesis.
     _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_GENESIS}" "${MPCTL_DKR_IMAGE_NAME_GENESIS}"
 
-    # HNSW server: standard.
+    # HNSW server: main.
     _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_STANDARD}" "${MPCTL_DKR_IMAGE_NAME_STANDARD}"
 
     # HNSW tests: e2e.

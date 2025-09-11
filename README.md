@@ -51,3 +51,9 @@ The mpctl utility can be used to:
 - Control a network running on bare metal with Dockerised services
 - Launch jobs for interacting with Dockerised postgres or localstack services.
 - Launch jobs for testing.
+
+Recipes
+--------------------------------------
+
+- [Running network in a *fully* dockerised local development environment](./docs/local-net-fully-dockerised.md)
+- [Running network in a *partially* dockerised local development environment](./docs/local-net-partially-dockerised.md)

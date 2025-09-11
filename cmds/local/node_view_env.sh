@@ -20,9 +20,11 @@ function _main()
 {
     local idx_of_node=${1}
 
-    source "${MPCTL}"/cmds/local/node_activate_env.sh \
+    source \
+        "${MPCTL}"/cmds/local/node_activate_env.sh \
         node="${idx_of_node}" \
         batchsize="${batch_size}"
+
     printenv | grep "SMPC" | sort
 }
 
