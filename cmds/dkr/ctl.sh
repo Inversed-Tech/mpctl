@@ -12,96 +12,99 @@ function _help() {
 
     ARGS
     ----------------------------------------------------------------
-    image       Docker image: e2e | genesis | services | standard.
+    target      Docker target: e2e | genesis | services | standard | system.
     action      Docker compose action to perform: down | run | start | stop | up.
     "
 }
 
 function _main()
 {
-    local image=${1}
+    local target=${1}
     local action=${2}
     local mode=${3}
 
-    case "${image}" in
+    case "${target}" in
     "e2e")
         case "${action}" in
-        "down")
-            _e2e_down
-            ;;
-        "run")
-            _e2e_run
-            ;;
-        "up")
-            _e2e_up
-            ;;
-        *)
-            echo "Invalid e2e image action"
-            ;;
+            "down")
+                _e2e_down
+                ;;
+            "run")
+                _e2e_run
+                ;;
+            "up")
+                _e2e_up
+                ;;
+            *)
+                echo "Invalid e2e image action"
+                ;;
         esac
         ;;
     "genesis")
         case "${action}" in
-        "down")
-            _net_down "genesis"
-            ;;
-        "start")
-            _net_start "genesis"
-            ;;
-        "stop")
-            _net_stop "genesis"
-            ;;
-        "up")
-            _net_up "genesis" "${mode}"
-            ;;
-        *)
-            echo "Invalid genesis image action"
-            ;;
+            "down")
+                _net_down "genesis"
+                ;;
+            "start")
+                _net_start "genesis"
+                ;;
+            "stop")
+                _net_stop "genesis"
+                ;;
+            "up")
+                _net_up "genesis" "${mode}"
+                ;;
+            *)
+                echo "Invalid genesis image action"
+                ;;
         esac
         ;;
     "services")
         case "${action}" in
-        "down")
-            _services_down
-            ;;
-        "reset")
-            _services_reset "${mode}"
-            ;;
-        "up")
-            _services_up "${mode}"
-            ;;
-        *)
-            echo "Invalid services action"
-            ;;
+            "down")
+                _services_down
+                ;;
+            "reset")
+                _services_reset "${mode}"
+                ;;
+            "up")
+                _services_up "${mode}"
+                ;;
+            *)
+                echo "Invalid services action"
+                ;;
         esac
         ;;
     "standard")
         case "${action}" in
-        "down")
-            _net_down "standard"
-            ;;
-        "start")
-            _net_start "standard"
-            ;;
-        "stop")
-            _net_stop "standard"
-            ;;
-        "up")
-            _net_up "standard" "${mode}"
-            ;;
-        *)
-            echo "Invalid standard image action"
-            ;;
+            "down")
+                _net_down "standard"
+                ;;
+            "start")
+                _net_start "standard"
+                ;;
+            "stop")
+                _net_stop "standard"
+                ;;
+            "up")
+                _net_up "standard" "${mode}"
+                ;;
+            *)
+                echo "Invalid standard image action"
+                ;;
         esac
         ;;
     "system")
         case "${action}" in
-        "reset")
-            _system_reset "${mode}"
-            ;;
-        *)
-            echo "Invalid system action"
-            ;;
+            "reset")
+                _system_reset "${mode}"
+                ;;
+            "up")
+                _system_up "${mode}"
+                ;;
+            *)
+                echo "Invalid system action"
+                ;;
         esac
         ;;
     *)
@@ -211,12 +214,23 @@ function _services_up()
     popd || exit
 }
 
+function _system_down()
+{
+    _net_down
+    _services_down
+}
+
 function _system_reset()
 {
     local mode=${1:-"detached"}
 
-    _net_down
-    _services_down
+    _system_down
+    _system_up ${mode}
+}
+
+function _system_up()
+{
+    local mode=${1:-"detached"}
 
     _services_up ${mode}
     _net_up ${mode}
@@ -239,7 +253,7 @@ do
     VALUE=$(echo "$ARGUMENT" | cut -f2 -d=)
     case "$KEY" in
         action) _ACTION=${VALUE} ;;
-        image) _IMAGE=${VALUE} ;;
+        target) _TARGET=${VALUE} ;;
         help) _HELP="show" ;;
         mode) _MODE=${VALUE} ;;
         *)
@@ -249,5 +263,5 @@ done
 if [ "${_HELP:-""}" = "show" ]; then
     _help
 else
-    _main "${_IMAGE}" "${_ACTION}" "${_MODE}"
+    _main "${_TARGET}" "${_ACTION}" "${_MODE}"
 fi
