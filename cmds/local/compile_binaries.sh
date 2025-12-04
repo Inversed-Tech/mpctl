@@ -4,7 +4,7 @@ function _help() {
     echo "
     COMMAND
     ----------------------------------------------------------------
-    mpctl-infra-bin-compile
+    mpctl-local-compile-binaries
 
     DESCRIPTION
     ----------------------------------------------------------------
@@ -24,29 +24,30 @@ function _main()
 {
     local build_mode=${1}
 
-    _do_build "${build_mode}" "iris-mpc" "client"
-    _do_build "${build_mode}" "iris-mpc" "iris-mpc-hawk"
-    _do_build "${build_mode}" "iris-mpc-common" "key-manager"
-    _do_build "${build_mode}" "iris-mpc-cpu" "graph-mem-cli"
-    _do_build "${build_mode}" "iris-mpc-cpu" "init-test-dbs"
-    _do_build "${build_mode}" "iris-mpc-cpu" "generate_benchmark_data"
-    _do_build "${build_mode}" "iris-mpc-upgrade-hawk" "iris-mpc-hawk-genesis"
+    _do_build "${build_mode}" "client"
+    _do_build "${build_mode}" "generate-benchmark-data"
+    _do_build "${build_mode}" "graph-mem-cli"
+    _do_build "${build_mode}" "init-test-dbs"
+    _do_build "${build_mode}" "iris-mpc-hawk"
+    _do_build "${build_mode}" "iris-mpc-hawk-genesis"
+    _do_build "${build_mode}" "key-manager"
+    _do_build "${build_mode}" "service-client"
+    _do_build "${build_mode}" "write-node-config-toml"
 }
 
 function _do_build()
 {
     local build_mode=${1}
+    local build_target=${2}
     local build_path
-    local build_subdir=${2}
-    local build_target=${3}
 
-    build_path="$(get_path_to_monorepo)"
+    build_path="$(get_path_to_monorepo)/iris-mpc-bins"
     if [ ! -d "${build_path}" ]; then
         log_error "Invalid build path: $build_path"
         return
     fi
 
-    log "Compiling binary: ${build_subdir} :: ${build_target} :: ${build_mode}"
+    log "Compiling binary: ${build_target} :: ${build_mode}"
 
     pushd "${build_path}" || exit
     if [ "${build_mode}" == "debug" ]; then

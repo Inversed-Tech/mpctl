@@ -25,5 +25,5 @@ function get_environment_name()
 source "${MPCTL}"/utils/os.sh
 source "${MPCTL}"/utils/paths.sh
 source "${MPCTL}"/utils/aws.sh
-source "${MPCTL}"/utils/docker.sh
 source "${MPCTL}"/utils/pgres.sh
+source "${MPCTL}"/cmds/dkr/constants.sh

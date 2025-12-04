@@ -21,7 +21,7 @@ function _main()
         rm -rf "${target_dir}"
     fi
 
-    pushd "$(get_path_to_monorepo)" || exit
+    pushd "$(get_path_to_monorepo)/iris-mpc-bins" || exit
     cargo run --release --bin graph-mem-cli -- backup-db \
         --db-url "postgres://postgres:postgres@localhost:5432/SMPC_dev_0" \
         --schema "SMPC_dev_0" \

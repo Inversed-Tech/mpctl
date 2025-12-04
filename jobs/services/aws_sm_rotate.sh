@@ -46,7 +46,7 @@ function _rotate_keys()
 {
     local idx_of_node=${1}
 
-    pushd "$(get_path_to_monorepo)" || exit
+    pushd "$(get_path_to_monorepo)/iris-mpc-bins" || exit
     cargo run --bin \
         key-manager -- \
             --endpoint-url "$(get_aws_endpoint_url)" \

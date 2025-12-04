@@ -15,13 +15,13 @@ function _help() {
 function _main()
 {
     # HNSW server: genesis.
-    _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_GENESIS}" "${MPCTL_DKR_IMAGE_NAME_GENESIS}"
+    # _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_GENESIS}" "${MPCTL_DKR_IMAGE_NAME_GENESIS}"
 
     # HNSW server: main.
     _build_image "${MPCTL_DKR_FILE_HNSW_SERVER_STANDARD}" "${MPCTL_DKR_IMAGE_NAME_STANDARD}"
 
     # HNSW tests: e2e.
-    _build_image "${MPCTL_DKR_FILE_HNSW_TESTS_E2E}" "${MPCTL_DKR_IMAGE_HNSW_TESTS_E2E}"
+    # _build_image "${MPCTL_DKR_FILE_HNSW_TESTS_E2E}" "${MPCTL_DKR_IMAGE_HNSW_TESTS_E2E}"
 }
 
 function _build_image()

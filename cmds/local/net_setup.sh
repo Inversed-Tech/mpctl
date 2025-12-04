@@ -30,9 +30,6 @@ function _main()
     _setup_fs
     log "    file system initialised"
 
-    _setup_config
-    log "    configuration initialised"
-
     _setup_binaries "${build_mode}"
     log "    binaries compiled"
     log "    binaries assigned"
@@ -60,7 +57,7 @@ function _setup_binaries()
         "$(get_path_to_target_binary client ${build_mode})" \
         "$(get_path_to_assets_of_net)/bin"
     cp \
-        "$(get_path_to_target_binary generate_benchmark_data ${build_mode})" \
+        "$(get_path_to_target_binary generate-benchmark-data ${build_mode})" \
         "$(get_path_to_assets_of_net)/bin"
     cp \
         "$(get_path_to_target_binary graph-mem-cli ${build_mode})" \
@@ -70,6 +67,12 @@ function _setup_binaries()
         "$(get_path_to_assets_of_net)/bin"
     cp \
         "$(get_path_to_target_binary key-manager ${build_mode})" \
+        "$(get_path_to_assets_of_net)/bin"
+    cp \
+        "$(get_path_to_target_binary service-client ${build_mode})" \
+        "$(get_path_to_assets_of_net)/bin"
+    cp \
+        "$(get_path_to_target_binary write-node-config-toml ${build_mode})" \
         "$(get_path_to_assets_of_net)/bin"
 
     # Copy node binaries.
@@ -85,44 +88,6 @@ function _setup_binaries()
 }
 
 ##############################################################################
-# Initialises a networks's configuration files.
-##############################################################################
-function _setup_config()
-{
-    local idx_of_node
-
-    for idx_of_node in $(seq 0 "$((MPCTL_COUNT_OF_PARTIES - 1))")
-    do
-        _setup_config_of_node "${idx_of_node}"
-    done
-}
-
-##############################################################################
-# Initialises a node's configuration files.
-##############################################################################
-function _setup_config_of_node()
-{
-    local idx_of_node=${1}
-    local path_to_assets_of_node
-
-    path_to_assets_of_node="$(get_path_to_assets_of_node "${idx_of_node}")"
-
-    # Env vars.
-    cp \
-        "$(get_path_to_resources)/envs/direnv.toml" \
-        "${path_to_assets_of_node}/env"
-    cp \
-        "$(get_path_to_resources)/envs/.envrc" \
-        "${path_to_assets_of_node}/env"
-    cp \
-        "$(get_path_to_resources)/envs/local.base.env" \
-        "${path_to_assets_of_node}/env/base.env"
-    cp \
-        "$(get_path_to_resources)/envs/local.node.${idx_of_node}.env" \
-        "${path_to_assets_of_node}/env/node.env"
-}
-
-##############################################################################
 # Initialises filesystem network assets.
 ##############################################################################
 function _setup_fs()
@@ -135,7 +100,6 @@ function _setup_fs()
     do
         path_to_assets_of_node="$(get_path_to_assets_of_node "${idx_of_node}")"
         mkdir -p "${path_to_assets_of_node}/bin"
-        mkdir "${path_to_assets_of_node}/env"
         mkdir "${path_to_assets_of_node}/logs"
     done
 }

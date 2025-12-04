@@ -34,14 +34,29 @@ function _main()
     source "$(get_path_to_monorepo)/.test.hawk${idx_of_node}.env"
 
     # Overridden evars (necessary to run locally).
+    # export SMPC__AWS__ENDPOINT="http://127.0.0.1:4566"
+    # export SMPC__CPU_DATABASE__URL="postgres://postgres:postgres@localhost:5432/SMPC_dev_${idx_of_node}"
+    # export SMPC__DATABASE__URL=${SMPC__CPU_DATABASE__URL}
+    # export SMPC__HNSW_SCHEMA_NAME_SUFFIX=_hnsw
+    # export SMPC__MAX_BATCH_SIZE=${size_of_batch}
+    # export SMPC__NODE_HOSTNAMES='["127.0.0.1","127.0.0.1","127.0.0.1"]'
     export AWS_ENDPOINT_URL="http://127.0.0.1:4566"
+    export RUST_LOG=info
     export RUST_MIN_STACK=104857600
-    export SMPC__AWS__ENDPOINT="http://127.0.0.1:4566"
+    export SMPC__DATABASE__URL="postgres://postgres:postgres@localhost:5432/SMPC_dev_${idx_of_node}"
     export SMPC__CPU_DATABASE__URL="postgres://postgres:postgres@localhost:5432/SMPC_dev_${idx_of_node}"
-    export SMPC__DATABASE__URL=${SMPC__CPU_DATABASE__URL}
-    export SMPC__HNSW_SCHEMA_NAME_SUFFIX=_hnsw
-    export SMPC__MAX_BATCH_SIZE=${size_of_batch}
-    export SMPC__NODE_HOSTNAMES='["127.0.0.1","127.0.0.1","127.0.0.1"]'
+    export SMPC__CPU_DATABASE__MIGRATE=true
+    export SMPC__ANON_STATS_DATABASE__MIGRATE=true
+    export SMPC__ANON_STATS_DATABASE__CREATE=true
+    export SMPC__ANON_STATS_DATABASE__LOAD_PARALLELISM=8
+    export SMPC__ANON_STATS_DATABASE__URL="postgres://postgres:postgres@localhost:5432/SMPC_dev_${idx_of_node}"
+    export SMPC__PARTY_ID="${idx_of_node}"
+    export SMPC__AWS__ENDPOINT="http://127.0.0.1:4566"
+    export SMPC__REQUESTS_QUEUE_URL="http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/smpcv2-${idx_of_node}-dev.fifo"
+    export SMPC__SERVER_COORDINATION__NODE_HOSTNAMES='["0.0.0.0","0.0.0.0","0.0.0.0"]'
+    export SMPC__SERVER_COORDINATION__PARTY_ID="${idx_of_node}"
+    export SMPC__SERVICE_PORTS='["4000","4001","4002"]'
+    export SMPC__HAWK_SERVER_HEALTHCHECK_PORT="300${idx_of_node}"
 
     # Unset automatic variable exportation.
     set +a

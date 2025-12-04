@@ -22,7 +22,7 @@ function _main()
         rm -rf "${target_dir}"
     fi
 
-    pushd "$(get_path_to_monorepo)" || exit
+    pushd "$(get_path_to_monorepo)/iris-mpc-bins" || exit
     cargo run --bin generate_benchmark_data
     cp -r "$(pwd)/iris-mpc-cpu/data" "${target_dir}"
     popd || exit
