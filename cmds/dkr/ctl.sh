@@ -96,6 +96,9 @@ function _main()
         ;;
     "system")
         case "${action}" in
+            "down")
+                _system_down
+                ;;
             "reset")
                 _system_reset "${mode}"
                 ;;

@@ -37,6 +37,7 @@ alias mpctl-dkr-node-view-logs-genesis='source $MPCTL/cmds/dkr/node_view_logs.sh
 alias mpctl-dkr-services-down='source $MPCTL/cmds/dkr/ctl.sh        target=services action=down'
 alias mpctl-dkr-services-reset='source $MPCTL/cmds/dkr/ctl.sh       target=services action=reset'
 alias mpctl-dkr-services-up='source $MPCTL/cmds/dkr/ctl.sh          target=services action=up'
+alias mpctl-dkr-system-down='source $MPCTL/cmds/dkr/ctl.sh          target=system action=down'
 alias mpctl-dkr-system-reset='source $MPCTL/cmds/dkr/ctl.sh         target=system action=reset'
 alias mpctl-dkr-system-up='source $MPCTL/cmds/dkr/ctl.sh            target=system action=up'
 
